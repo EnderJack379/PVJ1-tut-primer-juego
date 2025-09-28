@@ -7,12 +7,23 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     #region Atributos
-    /// <summary> Fuerza de movimiento del jugador. 
+    /// <summary> 
+    /// Fuerza de movimiento del jugador.
+    /// <summary>
     private Vector3 fuerzaPorAplicar;
-    /// <summary> Representa el tiempo que ha trancurrido desde la ultima vez que se aplico una fuerza al jugador.
+    /// <summary> 
+    /// Representa el tiempo que ha trancurrido desde la ultima vez que se aplico una fuerza al jugador.
+    /// <summary>
     private float tiempoDesdeUltimaFuerza;
-    /// <summary> Indica cada cuanto tiempo se aplica una fuerza al jugador.
+    /// <summary> 
+    /// Indica cada cuanto tiempo se aplica una fuerza al jugador.
+    /// <summary>
     private float intervaloTiempo;
+    /// <summary>
+    /// Indica la velociudad aplicada en el movimiento lateral del jugador.
+    /// </summary>
+    private float velocidadLateral;
+
     #endregion
 
 
@@ -23,8 +34,17 @@ public class PlayerMovement : MonoBehaviour
         fuerzaPorAplicar = new Vector3(0, 0, 5f);
         tiempoDesdeUltimaFuerza = 0f;
         intervaloTiempo = 2f;
+        velocidadLateral = 2f;
 
     }
+
+
+    private void Update()
+    {
+        float direccion = Input.GetAxis("Horizontal");
+        transform.Translate(direccion*velocidadLateral*Time.deltaTime,0,0);
+    }
+
 
     // Update is called once per frame
     private void FixedUpdate()
