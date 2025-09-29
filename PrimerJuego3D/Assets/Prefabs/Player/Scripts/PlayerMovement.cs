@@ -20,32 +20,33 @@ public class PlayerMovement : MonoBehaviour
     /// <summary>
     private float intervaloTiempo;
     /// <summary>
-    /// Indica la velociudad aplicada en el movimiento lateral del jugador.
-    /// </summary>
-    private float velocidadLateral;
-    /// <summary>
     /// Representa la estrategia de movimiento lateral del jugador.
     /// </summary>
     private IMovementStrategy strategy;
+    private Player player;
+    private Rigidbody rb;
 
     #endregion
 
     #region Ciclo de vida del script
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void Start()
     {
         fuerzaPorAplicar = new Vector3(0, 0, 5f);
         tiempoDesdeUltimaFuerza = 0f;
         intervaloTiempo = 2f;
-        velocidadLateral = 4f;
+        player = new Player(10f, 10f);
+
+        rb = GetComponent<Rigidbody>();
+
         SetStrategy(new MovimientoAcelerado());
 
     }
 
 
-    private void Update()
+    public void MovePlayer()
     {
-        strategy.Move(transform, velocidadLateral);
+        strategy.Move(transform, player);
     }
 
 
@@ -55,10 +56,20 @@ public class PlayerMovement : MonoBehaviour
         tiempoDesdeUltimaFuerza += Time.fixedDeltaTime;
         if (tiempoDesdeUltimaFuerza >= intervaloTiempo)
         {
-            GetComponent<Rigidbody>().AddForce(fuerzaPorAplicar, ForceMode.Impulse);
+                if (rb != null)
+               { 
+              rb.AddForce(fuerzaPorAplicar, ForceMode.Impulse);
+            }
+            
             tiempoDesdeUltimaFuerza = 0f;
         }
 
+    }
+
+    private void Update()
+    {
+        // Llama al movimiento lateral constantemente
+        MovePlayer();
     }
 
 
