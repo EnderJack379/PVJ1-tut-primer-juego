@@ -15,6 +15,6 @@ public class CameraFollwPlayer : MonoBehaviour
     // Update is called once per frame
     private void LateUpdate()
     {
-            gameObject.transform.position = playerMovement.transform.position + offSet;
+        gameObject.transform.position = playerMovement.transform.position + offSet;
     }
 }
