@@ -2,7 +2,7 @@ using UnityEngine;
 
 
 public class Player
-{
+{                                                                                                                                
     private float velocidad;
     private float aceleracion;
     private float velocidadActual;

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 /// <summary>
 /// Permite el comportamiento de movimiento del jugador.
@@ -44,10 +45,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    public void MovePlayer()
-    {
-        strategy.Move(transform, player);
-    }
+ 
 
 
     // Update is called once per frame
@@ -66,16 +64,22 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    private void Update()
+    // Llama al movimiento lateral constantemente
+    public void MovePlayer(float input)
     {
-        // Llama al movimiento lateral constantemente
-        MovePlayer();
+        strategy.Move(transform, player, input);
     }
+
+
 
 
     #endregion
 
     #region Lógica del script
+
+
+
+
     public void SetStrategy(IMovementStrategy strategy)
     {
         this.strategy = strategy;

@@ -3,5 +3,5 @@ using UnityEngine;
 
 public interface IMovementStrategy
 {
-  void Move(Transform targe, Player player);
+  public void Move(Transform targe, Player player, float direccion);
 }
